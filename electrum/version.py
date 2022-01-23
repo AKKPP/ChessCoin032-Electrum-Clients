@@ -1,4 +1,14 @@
-ELECTRUM_VERSION = '4.1.5'     # version of the client package
+from sys import platform as _platform
+
+if _platform == "linux" or _platform == "linux2":
+    ELECTRUM_VERSION = '1.0.1.2'
+elif _platform == "darwin":
+    ELECTRUM_VERSION = '1.0.1.3'
+elif _platform == "win32":
+    ELECTRUM_VERSION = '1.0.1.1'
+elif _platform == "win64":
+    ELECTRUM_VERSION = '1.0.1.1'
+
 APK_VERSION = '4.1.5.0'        # read by buildozer.spec
 
 PROTOCOL_VERSION = '1.4'     # protocol version requested

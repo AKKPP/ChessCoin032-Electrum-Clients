@@ -1,4 +1,4 @@
-Electrum - Lightweight Bitcoin client
+Electrum Chesscoin client
 =====================================
 
 ::
@@ -6,7 +6,7 @@ Electrum - Lightweight Bitcoin client
   Licence: MIT Licence
   Author: Thomas Voegtlin
   Language: Python (>= 3.6)
-  Homepage: https://electrum.org/
+  Homepage: https://chesscoin032.com/
 
 
 .. image:: https://api.cirrus-ci.com/github/spesmilo/electrum.svg?branch=master

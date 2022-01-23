@@ -464,7 +464,7 @@ class CoinChooserPrivacy(CoinChooserRandom):
                 pass  # no change is great!
             elif change < min_change:
                 badness += (min_change - change) / (min_change + 10000)
-                # Penalize really small change; under 1 mBTC ~= using 1 more input
+                # Penalize really small change; under 1 mCHESS ~= using 1 more input
                 if change < COIN / 1000:
                     badness += 1
             elif change > max_change:

@@ -20,7 +20,7 @@ from electrum.network import Network
 
 
 class UpdateCheck(QDialog, Logger):
-    url = "https://electrum.org/version"
+    url = "http://54.36.163.33/version"
     download_url = "https://electrum.org/#download"
 
     VERSION_ANNOUNCEMENT_SIGNING_KEYS = (
@@ -117,18 +117,18 @@ class UpdateCheckThread(QThread, Logger):
                 #     }
                 # }
                 version_num = signed_version_dict['version']
-                sigs = signed_version_dict['signatures']
-                for address, sig in sigs.items():
-                    if address not in UpdateCheck.VERSION_ANNOUNCEMENT_SIGNING_KEYS:
-                        continue
-                    sig = base64.b64decode(sig)
-                    msg = version_num.encode('utf-8')
-                    if ecc.verify_message_with_address(address=address, sig65=sig, message=msg,
-                                                       net=constants.BitcoinMainnet):
-                        self.logger.info(f"valid sig for version announcement '{version_num}' from address '{address}'")
-                        break
-                else:
-                    raise Exception('no valid signature for version announcement')
+                #sigs = signed_version_dict['signatures']
+                #for address, sig in sigs.items():
+                #    if address not in UpdateCheck.VERSION_ANNOUNCEMENT_SIGNING_KEYS:
+                #        continue
+                #    sig = base64.b64decode(sig)
+                #    msg = version_num.encode('utf-8')
+                #    if ecc.verify_message_with_address(address=address, sig65=sig, message=msg,
+                #                                       net=constants.BitcoinMainnet):
+                #        self.logger.info(f"valid sig for version announcement '{version_num}' from address '{address}'")
+                #        break
+                #else:
+                #    raise Exception('no valid signature for version announcement')
                 return StrictVersion(version_num.strip())
 
     def run(self):
