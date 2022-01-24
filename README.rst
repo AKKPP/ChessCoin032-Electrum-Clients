@@ -8,21 +8,6 @@ Electrum Chesscoin client
   Language: Python (>= 3.6)
   Homepage: https://chesscoin032.com/
 
-
-.. image:: https://api.cirrus-ci.com/github/spesmilo/electrum.svg?branch=master
-    :target: https://cirrus-ci.com/github/spesmilo/electrum
-    :alt: Build Status
-.. image:: https://coveralls.io/repos/github/spesmilo/electrum/badge.svg?branch=master
-    :target: https://coveralls.io/github/spesmilo/electrum?branch=master
-    :alt: Test coverage statistics
-.. image:: https://d322cqt584bo4o.cloudfront.net/electrum/localized.svg
-    :target: https://crowdin.com/project/electrum
-    :alt: Help translate Electrum online
-
-
-
-
-
 Getting started
 ===============
 
@@ -94,8 +79,8 @@ Development version (git clone)
 
 Check out the code from GitHub::
 
-    git clone git://github.com/spesmilo/electrum.git
-    cd electrum
+    git clone git://github.com/OleksandrAAA/Chesscoin-electrum.git
+    cd Chesscoin-electrum
     git submodule update --init
 
 Run install (this should install dependencies)::
