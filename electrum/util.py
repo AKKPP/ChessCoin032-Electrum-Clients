@@ -87,7 +87,7 @@ base_units = {'CHESS':6, 'mCHESS':3, 'μCHESS':0}
 base_units_inverse = inv_dict(base_units)
 base_units_list = ['CHESS', 'mCHESS', 'μCHESS']  # list(dict) does not guarantee order
 
-DECIMAL_POINT_DEFAULT = 5  # mCHESS
+DECIMAL_POINT_DEFAULT = 3  # mCHESS
 
 
 class UnknownBaseUnit(Exception): pass
