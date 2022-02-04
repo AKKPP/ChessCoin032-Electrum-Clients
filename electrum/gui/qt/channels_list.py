@@ -283,9 +283,6 @@ class ChannelsList(MyTreeView):
 
     @QtCore.pyqtSlot(Abstract_Wallet)
     def do_update_rows(self, wallet):
-        # Prevent update part
-        return
-
         if wallet != self.parent.wallet:
             return
         channels = list(wallet.lnworker.channels.values()) if wallet.lnworker else []

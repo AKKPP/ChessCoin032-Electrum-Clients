@@ -35,7 +35,7 @@ def configure_dns_depending_on_proxy(is_proxy: bool) -> None:
         if sys.platform == 'win32':
             # On Windows, socket.getaddrinfo takes a mutex, and might hold it for up to 10 seconds
             # when dns-resolving. To speed it up drastically, we resolve dns ourselves, outside that lock.
-            # See https://github.com/spesmilo/electrum/issues/4421
+
             try:
                 _prepare_windows_dns_hack()
             except Exception as e:

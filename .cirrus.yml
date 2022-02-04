@@ -88,13 +88,15 @@ task:
 
 task:
   name: Regtest functional tests
-  container:
-    image: $ELECTRUM_IMAGE
+  compute_engine_instance:
+    image_project: cirrus-images
+    image: family/docker-builder
+    platform: linux
     cpu: 1
     memory: 1G
   pip_cache:
     folder: ~/.cache/pip
-    fingerprint_script: echo Regtest && echo $ELECTRUM_IMAGE && cat $ELECTRUM_REQUIREMENTS
+    fingerprint_script: echo Regtest && echo docker_builder && cat $ELECTRUM_REQUIREMENTS
     populate_script: mkdir -p ~/.cache/pip
   electrum_cache:
     folder: /tmp/electrum-build

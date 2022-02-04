@@ -4,11 +4,11 @@
 [Desktop Entry]
 Comment=Lightweight Bitcoin Client
 Exec=sh -c "PATH=\"\\$HOME/.local/bin:\\$PATH\"; electrum %u"
-GenericName[en_US]=Bitcoin Wallet
-GenericName=Bitcoin Wallet
+GenericName[en_US]=Chesscoin Wallet
+GenericName=Chesscoin Wallet
 Icon=electrum
-Name[en_US]=Electrum Bitcoin Wallet
-Name=Electrum Bitcoin Wallet
+Name[en_US]=Chesscoin Electrum Wallet
+Name=Chesscoin Electrum Wallet
 Categories=Finance;Network;
 StartupNotify=true
 StartupWMClass=electrum

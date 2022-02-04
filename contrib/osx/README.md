@@ -23,7 +23,6 @@ Notes about compatibility with different macOS versions:
   need to be notarized by Apple's central server. The catch is that to be able to build
   binaries that Apple will notarise (due to the requirements on the binaries themselves,
   e.g. hardened runtime) the build machine needs at least macOS 10.14.
-  See [#6128](https://github.com/spesmilo/electrum/issues/6128).
 
 We currently build the release binaries on macOS 10.14.6, and these seem to run on
 10.13 or newer.

@@ -260,7 +260,7 @@ class Commands:
     @command('')
     async def restore(self, text, passphrase=None, password=None, encrypt_file=True, wallet_path=None):
         """Restore a wallet from text. Text can be a seed phrase, a master
-        public key, a master private key, a list of bitcoin addresses
+        public key, a master private key, a list of Chesscoin addresses
         or bitcoin private keys.
         If you want to be prompted for an argument, type '?' or ':' (concealed)
         """
@@ -748,7 +748,7 @@ class Commands:
 
     @command('w')
     async def setlabel(self, key, label, wallet: Abstract_Wallet = None):
-        """Assign a label to an item. Item may be a bitcoin address or a
+        """Assign a label to an item. Item may be a Chesscoin address or a
         transaction ID"""
         wallet.set_label(key, label)
 
@@ -1265,8 +1265,8 @@ def eval_bool(x: str) -> bool:
 
 param_descriptions = {
     'privkey': 'Private key. Type \'?\' to get a prompt.',
-    'destination': 'Bitcoin address, contact or alias',
-    'address': 'Bitcoin address',
+    'destination': 'Chesscoin address, contact or alias',
+    'address': 'Chesscoin address',
     'seed': 'Seed phrase',
     'txid': 'Transaction ID',
     'pos': 'Position',
