@@ -44,7 +44,6 @@ GIT_REPO_URL = "https://github.com/OleksandrAAA/ChessCoin-electrum"
 GIT_REPO_ISSUES_URL = "https://github.com/OleksandrAAA/ChessCoin-electrum/issues"
 BIP39_WALLET_FORMATS = read_json('bip39_wallet_formats.json', [])
 
-
 class AbstractNet:
 
     NET_NAME: str
@@ -70,14 +69,14 @@ class AbstractNet:
 class ChesscoinMainnet(AbstractNet):
     NET_NAME = "mainnet"
     TESTNET = False
-    ADDRTYPE_P2PKH = 0x19
+    ADDRTYPE_P2PKH = 0x1C
     ADDRTYPE_P2SH = 0x55
-    SEGWIT_HRP = "bc"
+    SEGWIT_HRP = "c"
     BOLT11_HRP = SEGWIT_HRP
     GENESIS = "0000048f94311e912681a9a25eb553e4a4d1703689c5f9a264c7b07245c7ff1f"
     DEFAULT_PORTS = {'t': '57301', 's': '57302'}
     DEFAULT_SERVERS = read_json('servers.json', {})
-    CHECKPOINTS = []
+    CHECKPOINTS = read_json('checkpoints.json', [])
     XPRV_HEADERS = {
         'standard':    0x0488ade4,  # xprv
         'p2wpkh-p2sh': 0x049d7878,  # yprv

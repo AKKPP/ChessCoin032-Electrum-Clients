@@ -91,7 +91,9 @@ def parse_servers(result: Sequence[Tuple[str, str, List[str]]]) -> Dict[str, dic
         pruning_level = '-'
         if len(item) > 2:
             for v in item[2]:
-                if re.match(r"[st]\d*", v):
+                if re.match(r"alias", v):
+                    out['alias'] = v[1:]
+                elif re.match(r"[st]\d*", v):
                     protocol, port = v[0], v[1:]
                     if port == '': port = constants.net.DEFAULT_PORTS[protocol]
                     ServerAddr(host, port, protocol=protocol)  # check if raises
@@ -466,8 +468,8 @@ class Network(Logger, NetworkRetryManager[ServerAddr]):
             await group.spawn(get_banner)
             await group.spawn(get_donation_address)
             await group.spawn(get_server_peers)
-            await group.spawn(get_relay_fee)
-            await group.spawn(self._request_fee_estimates(interface))
+            #await group.spawn(get_relay_fee)
+            #await group.spawn(self._request_fee_estimates(interface))
 
     async def _request_fee_estimates(self, interface):
         self.config.requested_fee_estimates()

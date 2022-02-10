@@ -772,7 +772,6 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
 
         help_menu = menubar.addMenu(_("&Help"))
         help_menu.addAction(_("&About"), self.show_about)
-        help_menu.addAction(_("&Check for updates"), self.show_update_check)
         help_menu.addAction(_("&Official website"), lambda: webopen("https://chesscoin032.com/"))
 
         self.setMenuBar(menubar)
@@ -786,7 +785,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
             self.show_error(_('No donation address for this server'))
 
     def show_about(self):
-        QMessageBox.about(self, "Electrum For ChessCoin 0.32%",
+        QMessageBox.about(self, "Electrum ChessCoin Wallet",
                           (_("Version")+" %s" % ELECTRUM_VERSION + "\n\n" +
                            _("Electrum's focus is speed, with low resource usage and simplifying ChessCoin 0.32%. ") +
                            _("You do not need to perform regular backups, because your wallet can be " 

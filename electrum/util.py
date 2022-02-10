@@ -83,11 +83,11 @@ def all_subclasses(cls) -> Set:
 ca_path = certifi.where()
 
 
-base_units = {'CHESS':6, 'mCHESS':3, 'μCHESS':0}
+base_units = {'CHESS':8, 'mCHESS':5, 'μCHESS':2}
 base_units_inverse = inv_dict(base_units)
 base_units_list = ['CHESS', 'mCHESS', 'μCHESS']  # list(dict) does not guarantee order
 
-DECIMAL_POINT_DEFAULT = 3  # mCHESS
+DECIMAL_POINT_DEFAULT = 5  # mCHESS
 
 
 class UnknownBaseUnit(Exception): pass
@@ -928,7 +928,7 @@ def block_explorer_URL(config: 'SimpleConfig', kind: str, item: str) -> Optional
 
 
 # note: when checking against these, use .lower() to support case-insensitivity
-BITCOIN_BIP21_URI_SCHEME = 'bitcoin'
+BITCOIN_BIP21_URI_SCHEME = 'chesscoin'
 LIGHTNING_URI_SCHEME = 'lightning'
 
 

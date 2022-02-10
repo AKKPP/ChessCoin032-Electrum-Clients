@@ -3,13 +3,15 @@
         "pruning": "-",
         "s": "57302",
         "t": "57301",
-        "version": "1.4"
+        "version": "1.4",
+	"alias": "ChessCoin032_Wilhelm Steinitz"
     },
 
-    "vps-84893adc.vps.ovh.net": {
+    "vps-84983adc.vps.ovh.net": {
         "pruning": "-",
         "s": "57302",
         "t": "57301",
-        "version": "1.4"
+        "version": "1.4",
+	"alias": "ChessCoin032_Emanuel Lasker"
     }
 }
