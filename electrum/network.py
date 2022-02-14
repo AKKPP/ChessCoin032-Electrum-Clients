@@ -83,6 +83,7 @@ def parse_servers(result: Sequence[Tuple[str, str, List[str]]]) -> Dict[str, dic
     """Convert servers list (from protocol method "server.peers.subscribe") into dict format.
     Also validate values, such as IP addresses and ports.
     """
+
     servers = {}
     for item in result:
         host = item[1]
@@ -91,9 +92,7 @@ def parse_servers(result: Sequence[Tuple[str, str, List[str]]]) -> Dict[str, dic
         pruning_level = '-'
         if len(item) > 2:
             for v in item[2]:
-                if re.match(r"alias", v):
-                    out['alias'] = v[1:]
-                elif re.match(r"[st]\d*", v):
+                if re.match(r"[st]\d*", v):
                     protocol, port = v[0], v[1:]
                     if port == '': port = constants.net.DEFAULT_PORTS[protocol]
                     ServerAddr(host, port, protocol=protocol)  # check if raises

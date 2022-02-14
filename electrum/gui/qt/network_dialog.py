@@ -117,7 +117,8 @@ class NodesListWidget(QTreeWidget):
         elif item_type == self.ItemType.DISCONNECTED_SERVER:
             server = item.data(0, self.SERVER_ADDR_ROLE)  # type: ServerAddr
             def func():
-                self.parent.server_e.setText(server.net_addr_str())
+                servername = util.check_server_name(server.net_addr_str())
+                self.parent.server_e.setText(servername)
                 self.parent.set_server()
             menu.addAction(_("Use as server"), func)
         elif item_type == self.ItemType.CHAIN:
@@ -152,6 +153,7 @@ class NodesListWidget(QTreeWidget):
             if b is None: continue
             name = b.get_name()
             if n_chains > 1:
+                name = util.check_server_name(name)
                 x = QTreeWidgetItem([name + '@%d'%b.get_max_forkpoint(), '%d'%b.height()])
                 x.setData(0, self.ITEMTYPE_ROLE, self.ItemType.CHAIN)
                 x.setData(0, self.CHAIN_ID_ROLE, b.get_id())
@@ -159,9 +161,11 @@ class NodesListWidget(QTreeWidget):
                 x = connected_servers_item
             for i in interfaces:
                 star = ' *' if i == network.interface else ''
-                item = QTreeWidgetItem([f"{i.server.to_friendly_name()}" + star, '%d'%i.tip])
+                servername = f"{i.server.to_friendly_name()}"
+                servername = util.check_server_name(servername)
+                item = QTreeWidgetItem([servername + star, '%d'%i.tip])
                 item.setData(0, self.ITEMTYPE_ROLE, self.ItemType.CONNECTED_SERVER)
-                item.setData(0, self.SERVER_ADDR_ROLE, i.server)
+                item.setData(0, self.SERVER_ADDR_ROLE, i.server)   
                 item.setToolTip(0, str(i.server))
                 x.addChild(item)
             if n_chains > 1:
@@ -180,7 +184,9 @@ class NodesListWidget(QTreeWidget):
             port = d.get(protocol)
             if port:
                 server = ServerAddr(_host, port, protocol=protocol)
-                item = QTreeWidgetItem([server.net_addr_str(), ""])
+                servername = server.net_addr_str()
+                servername = util.check_server_name(servername)
+                item = QTreeWidgetItem([servername, ""])
                 item.setData(0, self.ITEMTYPE_ROLE, self.ItemType.DISCONNECTED_SERVER)
                 item.setData(0, self.SERVER_ADDR_ROLE, server)
                 disconnected_servers_item.addChild(item)
@@ -344,7 +350,8 @@ class NetworkChoiceLayout(object):
         server = net_params.server
         auto_connect = net_params.auto_connect
         if not self.server_e.hasFocus():
-            self.server_e.setText(server.to_friendly_name())
+            servername = util.check_server_name(server.to_friendly_name())
+            self.server_e.setText(servername)
         self.autoconnect_cb.setChecked(auto_connect)
 
         height_str = "%d "%(self.network.get_local_height()) + _('blocks')

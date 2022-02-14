@@ -24,13 +24,19 @@
 # SOFTWARE.
 
 import ast
+import os
+import platform
+import subprocess
+
 from typing import Optional, TYPE_CHECKING
 
-from PyQt5.QtCore import Qt
+from PyQt5.QtCore import Qt, QUrl
 from PyQt5.QtWidgets import (QComboBox,  QTabWidget,
                              QSpinBox,  QFileDialog, QCheckBox, QLabel,
                              QVBoxLayout, QGridLayout, QLineEdit,
                              QPushButton, QWidget, QHBoxLayout)
+
+from PyQt5.QtGui import QDesktopServices
 
 from electrum.i18n import _, languages
 from electrum import util, coinchooser, paymentrequest
@@ -39,8 +45,7 @@ from electrum.util import base_units_list
 from electrum.gui import messages
 
 from .util import (ColorScheme, WindowModalDialog, HelpLabel, Buttons,
-                   CloseButton)
-
+                   CloseButton, read_QIcon)
 
 if TYPE_CHECKING:
     from electrum.simple_config import SimpleConfig
@@ -225,7 +230,7 @@ class SettingsDialog(WindowModalDialog):
         unit_combo.currentIndexChanged.connect(lambda x: on_unit(x, nz))
         gui_widgets.append((unit_label, unit_combo))
 
-        thousandsep_cb = QCheckBox(_("Add thousand separators to bitcoin amounts"))
+        thousandsep_cb = QCheckBox(_("Add thousand separators to chesscoin amounts"))
         thousandsep_cb.setChecked(bool(self.config.get('amt_add_thousands_sep', False)))
         def on_set_thousandsep(v):
             checked = v == Qt.Checked
@@ -278,6 +283,22 @@ class SettingsDialog(WindowModalDialog):
         filelogging_cb.stateChanged.connect(on_set_filelogging)
         filelogging_cb.setToolTip(_('Debug logs can be persisted to disk. These are useful for troubleshooting.'))
         gui_widgets.append((filelogging_cb, None))
+
+        savedlocation_label = QLabel(_('Saved Location:'))
+        explorer_button = QPushButton(_('  Open Saved Folder'))
+        explorer_button.setIcon(read_QIcon("file.png"))
+        def on_explorer():
+            self.open_file(savedlocation_edit.text())
+            #QDesktopServices.openUrl(QUrl.fromLocalFile(savedlocation_edit.text()))
+
+        explorer_button.clicked.connect(on_explorer)
+        gui_widgets.append((savedlocation_label, None))
+
+        savedlocation_edit = QLineEdit()
+        savedlocation_edit.setReadOnly(True)
+        savedlocation_edit.setText(util.user_dir())
+        savedlocation_edit.setStyleSheet("background-color:white")
+        gui_widgets.append((savedlocation_edit, None))
 
         preview_cb = QCheckBox(_('Advanced preview'))
         preview_cb.setChecked(bool(self.config.get('advanced_preview', False)))
@@ -542,3 +563,11 @@ class SettingsDialog(WindowModalDialog):
         self.config.set_key('alias', alias, True)
         if alias:
             self.window.fetch_alias()
+
+    def open_file(self, path):
+        if platform.system() == "Windows":
+            os.startfile(path)
+        elif platform.system() == "Darwin":
+            subprocess.Popen(["open", path])
+        else:
+            subprocess.Popen(["xdg-open", path])
