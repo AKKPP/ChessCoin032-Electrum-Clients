@@ -30,6 +30,7 @@
 import struct
 import traceback
 import sys
+import time
 import io
 import base64
 from typing import (Sequence, Union, NamedTuple, Tuple, Optional, Iterable,
@@ -575,8 +576,6 @@ def multisig_script(public_keys: Sequence[str], m: int) -> str:
     return construct_script([m, *public_keys, n, opcodes.OP_CHECKMULTISIG])
 
 
-
-
 class Transaction:
     _cached_network_ser: Optional[str]
 
@@ -593,11 +592,12 @@ class Transaction:
             self._cached_network_ser = bh2u(raw)
         else:
             raise Exception(f"cannot initialize transaction from {raw}")
+
         self._inputs = None  # type: List[TxInput]
         self._outputs = None  # type: List[TxOutput]
         self._locktime = 0
         self._version = 2
-
+        self._time = int(time.time())
         self._cached_txid = None  # type: Optional[str]
 
     @property
@@ -621,12 +621,25 @@ class Transaction:
         self._version = value
         self.invalidate_ser_cache()
 
+    @property
+    def time(self):
+        self.deserialize()
+        return self._time  
+
+
+    @time.setter
+    def time(self, value: int):
+        assert isinstance(value, int), f"time must be int, not {value!r}"
+        self._time = value
+        self.invalidate_ser_cache()             
+
     def to_json(self) -> dict:
         d = {
             'version': self.version,
             'locktime': self.locktime,
             'inputs': [txin.to_json() for txin in self.inputs()],
             'outputs': [txout.to_json() for txout in self.outputs()],
+            'time': self.time,
         }
         return d
 
@@ -650,7 +663,9 @@ class Transaction:
         vds = BCDataStream()
         vds.write(raw_bytes)
         self._version = vds.read_int32()
+        self._time = vds.read_int32()
         n_vin = vds.read_compact_size()
+
         is_segwit = (n_vin == 0)
         if is_segwit:
             marker = vds.read_bytes(1)
@@ -852,6 +867,7 @@ class Transaction:
         """
         self.deserialize()
         nVersion = int_to_hex(self.version, 4)
+        nTime = int_to_hex(self.time, 4)
         nLocktime = int_to_hex(self.locktime, 4)
         inputs = self.inputs()
         outputs = self.outputs()
@@ -873,7 +889,7 @@ class Transaction:
             witness = ''.join(self.serialize_witness(x, estimate_size=estimate_size) for x in inputs)
             return nVersion + marker + flag + txins + txouts + witness + nLocktime
         else:
-            return nVersion + txins + txouts + nLocktime
+            return nVersion + nTime + txins + txouts + nLocktime
 
     def to_qr_data(self) -> str:
         """Returns tx as data to be put into a QR code. No side-effects."""
@@ -1670,6 +1686,7 @@ class PartialTransaction(Transaction):
                        for txin in tx.inputs()]
         res._outputs = [PartialTxOutput.from_txout(txout) for txout in tx.outputs()]
         res.version = tx.version
+        res.time = tx.time
         res.locktime = tx.locktime
         return res
 
@@ -1897,6 +1914,7 @@ class PartialTransaction(Transaction):
                            bip143_shared_txdigest_fields: BIP143SharedTxDigestFields = None) -> str:
         nVersion = int_to_hex(self.version, 4)
         nLocktime = int_to_hex(self.locktime, 4)
+        nTime = int_to_hex(self.time, 4)
         inputs = self.inputs()
         outputs = self.outputs()
         txin = inputs[txin_index]
@@ -1931,7 +1949,7 @@ class PartialTransaction(Transaction):
             txins = var_int(len(inputs)) + ''.join(self.serialize_input(txin, preimage_script if txin_index==k else '')
                                                    for k, txin in enumerate(inputs))
             txouts = var_int(len(outputs)) + ''.join(o.serialize_to_network().hex() for o in outputs)
-            preimage = nVersion + txins + txouts + nLocktime + nHashType
+            preimage = nVersion + nTime + txins + txouts + nLocktime + nHashType
         return preimage
 
     def sign(self, keypairs) -> None:

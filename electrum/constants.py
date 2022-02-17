@@ -69,8 +69,9 @@ class AbstractNet:
 class ChesscoinMainnet(AbstractNet):
     NET_NAME = "mainnet"
     TESTNET = False
-    ADDRTYPE_P2PKH = 0x1C
-    ADDRTYPE_P2SH = 0x55
+    WIF_PREFIX = 0x9C
+    ADDRTYPE_P2PKH = 28
+    ADDRTYPE_P2SH = 85
     SEGWIT_HRP = "c"
     BOLT11_HRP = SEGWIT_HRP
     GENESIS = "0000048f94311e912681a9a25eb553e4a4d1703689c5f9a264c7b07245c7ff1f"
@@ -93,6 +94,7 @@ class ChesscoinMainnet(AbstractNet):
         'p2wsh':       0x02aa7ed3,  # Zpub
     }
     XPUB_HEADERS_INV = inv_dict(XPUB_HEADERS)
+    BIP44_COIN_TYPE = 248
 
 
 class BitcoinMainnet(AbstractNet):
