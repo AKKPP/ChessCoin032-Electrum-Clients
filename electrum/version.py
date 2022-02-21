@@ -1,5 +1,7 @@
 from sys import platform as _platform
 
+ELECTRUM_APP_VERSION = '1.0.1'
+
 if _platform == "linux" or _platform == "linux2":
     ELECTRUM_VERSION = '1.0.1.2'
 elif _platform == "darwin":

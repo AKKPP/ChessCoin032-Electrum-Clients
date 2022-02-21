@@ -798,9 +798,9 @@ def time_difference(distance_in_time, include_seconds):
 
 mainnet_block_explorers = {
     'Chesscoin032': ('http://explorer.chesscoin032.com/',
-                        {'tx': '', 'addr': ''}),
+                        {'tx': 'tx/', 'addr': ''}),
     'cryptoid.info': ('https://chainz.cryptoid.info/chess/',
-                        {'tx': '', 'addr': ''}),
+                        {'tx': 'tx.dws?', 'addr': ''}),
     'system default': ('blockchain:/',
                         {'tx': 'tx/', 'addr': 'address/'}),						
  }
@@ -1635,6 +1635,6 @@ def get_running_loop():
         return None
 
 def check_server_name(servername):
-    servername = servername.replace("vps-f40cfe72.vps.ovh.net", "ChessCoin032-Wilhelm-Steinitz")
+    servername = servername.replace("vps-f40cfe72.vps.ovh.net", "ChessCoin023-Wilhelm-Steinitz")
     servername = servername.replace("vps-84983adc.vps.ovh.net", "ChessCoin032-Emanuel-Lasker")
     return servername

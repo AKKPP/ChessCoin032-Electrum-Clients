@@ -76,7 +76,7 @@ class UpdateCheck(QDialog, Logger):
 
     @staticmethod
     def is_newer(latest_version):
-        return latest_version > StrictVersion(version.ELECTRUM_VERSION)
+        return latest_version > StrictVersion(version.ELECTRUM_APP_VERSION)
 
     def update_view(self, latest_version=None):
         if latest_version:
