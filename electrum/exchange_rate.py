@@ -79,7 +79,7 @@ class ExchangeBase(Logger):
         try:
             self.logger.info(f"getting fx quotes for {ccy}")
             self.quotes = await self.get_rates(ccy)
-            self.logger.info("received fx quotes")
+            self.logger.info(f"received fx quotes {self.quotes}")
         except asyncio.CancelledError:
             # CancelledError must be passed-through for cancellation to work
             raise

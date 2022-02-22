@@ -23,6 +23,7 @@
 # CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
+from ast import Constant
 from decimal import Decimal
 from typing import TYPE_CHECKING, Optional, Union
 
@@ -35,6 +36,8 @@ from electrum.plugin import run_hook
 from electrum.transaction import Transaction, PartialTransaction
 from electrum.simple_config import FEERATE_WARNING_HIGH_FEE, FEE_RATIO_HIGH_WARNING
 from electrum.wallet import InternalAddressCorruption
+
+from electrum.constants import ChesscoinMainnet
 
 from .util import (WindowModalDialog, ColorScheme, HelpLabel, Buttons, CancelButton,
                    BlockingWaitingDialog, PasswordLineEdit)
@@ -161,6 +164,7 @@ class ConfirmTxDialog(TxEditor, WindowModalDialog):
         grid.addWidget(self.extra_fee_value, 2, 1)
 
         self.fee_slider = FeeSlider(self, self.config, self.fee_slider_callback)
+        self.fee_slider.setDisabled(True)
         self.fee_combo = FeeComboBox(self.fee_slider)
         grid.addWidget(HelpLabel(_("Fee rate") + ": ", self.fee_combo.help_msg), 5, 0)
         grid.addWidget(self.fee_slider, 5, 1)
@@ -176,6 +180,8 @@ class ConfirmTxDialog(TxEditor, WindowModalDialog):
         grid.addWidget(self.pw_label, 8, 0)
         grid.addWidget(self.pw, 8, 1, 1, -1)
         self.preview_button = QPushButton(_('Advanced'))
+        self.preview_button.setDisabled(True)
+        self.preview_button.setVisible(False)
         self.preview_button.clicked.connect(self.on_preview)
         grid.addWidget(self.preview_button, 0, 2)
         self.send_button = QPushButton(_('Send'))

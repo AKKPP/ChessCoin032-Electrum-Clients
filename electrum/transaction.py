@@ -52,6 +52,7 @@ from .bitcoin import (TYPE_ADDRESS, TYPE_SCRIPT, hash_160,
                       base_encode, construct_witness, construct_script)
 from .crypto import sha256d
 from .logging import get_logger
+from .constants import ChesscoinMainnet
 
 if TYPE_CHECKING:
     from .wallet import Abstract_Wallet
@@ -1906,7 +1907,8 @@ class PartialTransaction(Transaction):
 
     def get_fee(self) -> Optional[int]:
         try:
-            return self.input_value() - self.output_value()
+            return ChesscoinMainnet.COINFEE
+            #return self.input_value() - self.output_value()
         except MissingTxInputAmount:
             return None
 

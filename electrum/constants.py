@@ -95,6 +95,7 @@ class ChesscoinMainnet(AbstractNet):
     }
     XPUB_HEADERS_INV = inv_dict(XPUB_HEADERS)
     BIP44_COIN_TYPE = 248
+    COINFEE = 10000
 
 
 class BitcoinMainnet(AbstractNet):

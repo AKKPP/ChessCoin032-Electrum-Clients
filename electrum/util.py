@@ -1635,6 +1635,25 @@ def get_running_loop():
         return None
 
 def check_server_name(servername):
+    found = servername.find("54.36.163.33")
+    if found != -1:
+        servername = servername.replace("54.36.163.33", "ChessCoin023-Wilhelm-Steinitz")
+        return servername
+
+    found = servername.find("51.178.41.236")
+    if found != -1:
+        servername = servername.replace("51.178.41.236", "ChessCoin032-Emanuel-Lasker")
+        return servername
+
+    found = servername.find("vps-f40cfe72.vps.ovh.net")
+    if found != -1:
     servername = servername.replace("vps-f40cfe72.vps.ovh.net", "ChessCoin023-Wilhelm-Steinitz")
+        return servername
+
+    found = servername.find("vps-84983adc.vps.ovh.net")
+    if found != -1:
     servername = servername.replace("vps-84983adc.vps.ovh.net", "ChessCoin032-Emanuel-Lasker")
+    
     return servername
+
+    

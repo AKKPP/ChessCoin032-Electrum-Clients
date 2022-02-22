@@ -30,6 +30,7 @@ from typing import Tuple, TYPE_CHECKING
 import threading
 
 from PyQt5.QtCore import Qt, pyqtSignal, QThread
+import PyQt5.QtCore as QtCore
 from PyQt5.QtWidgets import (QTreeWidget, QTreeWidgetItem, QMenu, QGridLayout, QComboBox,
                              QLineEdit, QDialog, QVBoxLayout, QHeaderView, QCheckBox,
                              QTabWidget, QWidget, QLabel)
@@ -186,6 +187,10 @@ class NodesListWidget(QTreeWidget):
                 server = ServerAddr(_host, port, protocol=protocol)
                 servername = server.net_addr_str()
                 servername = util.check_server_name(servername)
+                founditem = self.findItems(servername, QtCore.Qt.MatchContains | QtCore.Qt.MatchRecursive, 0)
+                if len(founditem) > 0:
+                    continue
+
                 item = QTreeWidgetItem([servername, ""])
                 item.setData(0, self.ITEMTYPE_ROLE, self.ItemType.DISCONNECTED_SERVER)
                 item.setData(0, self.SERVER_ADDR_ROLE, server)

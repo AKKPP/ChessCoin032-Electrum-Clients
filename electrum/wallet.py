@@ -48,6 +48,8 @@ import enum
 
 from aiorpcx import TaskGroup, timeout_after, TaskTimeout, ignore_after
 
+from electrum import constants
+
 from .i18n import _
 from .bip32 import BIP32Node, convert_bip32_intpath_to_strpath, convert_bip32_path_to_list_of_uint32
 from .crypto import sha256
@@ -596,6 +598,7 @@ class Abstract_Wallet(AddressSynchronizer, ABC):
         is_relevant = tx_wallet_delta.is_relevant
         is_any_input_ismine = tx_wallet_delta.is_any_input_ismine
         fee = tx_wallet_delta.fee
+        #fee = constants.net.COINFEE
         exp_n = None
         can_broadcast = False
         can_bump = False
