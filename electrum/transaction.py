@@ -1907,8 +1907,7 @@ class PartialTransaction(Transaction):
 
     def get_fee(self) -> Optional[int]:
         try:
-            return ChesscoinMainnet.COINFEE
-            #return self.input_value() - self.output_value()
+            return self.input_value() - self.output_value()
         except MissingTxInputAmount:
             return None
 

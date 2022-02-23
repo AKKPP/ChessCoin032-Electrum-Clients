@@ -887,8 +887,8 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
         """
         text = self.config.format_amount_and_units(amount_sat)
         fiat = self.fx.format_amount_and_units(amount_sat, timestamp=timestamp) if self.fx else None
-        #if text and fiat:
-        #    text += f' ({fiat})'
+        if text and fiat:
+            text += f' ({fiat})'
         return text
 
     def format_fiat_and_units(self, amount_sat) -> str:
@@ -977,12 +977,12 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
                     balance_text +=  " [%s unconfirmed]"%(self.format_amount(u, is_diff=True).strip())
                 if x:
                     balance_text +=  " [%s unmatured]"%(self.format_amount(x, is_diff=True).strip())
-                #if self.wallet.has_lightning():
-                #    l = self.wallet.lnworker.get_balance()
-                #    balance_text += u'    \U000026a1 %s'%(self.format_amount_and_units(l).strip())
-                ## append fiat balance and price
-                #if self.fx.is_enabled():
-                #    balance_text += self.fx.get_fiat_status_text(c + u + x, self.base_unit(), self.get_decimal_point()) or ''
+                if self.wallet.has_lightning():
+                    l = self.wallet.lnworker.get_balance()
+                    balance_text += u'    \U000026a1 %s'%(self.format_amount_and_units(l).strip())
+                # append fiat balance and price
+                if self.fx.is_enabled():
+                    balance_text += self.fx.get_fiat_status_text(c + u + x, self.base_unit(), self.get_decimal_point()) or ''
 
                 if not self.network.proxy:
                     icon = read_QIcon("status_connected%s.png"%fork_str)

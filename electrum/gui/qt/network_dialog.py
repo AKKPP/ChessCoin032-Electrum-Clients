@@ -141,6 +141,13 @@ class NodesListWidget(QTreeWidget):
         pt.setX(50)
         self.customContextMenuRequested.emit(pt)
 
+    def isExistItem(self, parentItem, text):
+        for i in range(parentItem.childCount()):
+            item = parentItem.child(i)
+            if item.text(0).find(text) != -1:
+                return True     
+        return False
+
     def update(self, *, network: Network, servers: dict, use_tor: bool):
         self.clear()
 
@@ -164,7 +171,8 @@ class NodesListWidget(QTreeWidget):
                 star = ' *' if i == network.interface else ''
                 servername = f"{i.server.to_friendly_name()}"
                 servername = util.check_server_name(servername)
-                item = QTreeWidgetItem([servername + star, '%d'%i.tip])
+                #item = QTreeWidgetItem([servername + star, '%d'%i.tip])
+                item = QTreeWidgetItem([servername + star, ""])
                 item.setData(0, self.ITEMTYPE_ROLE, self.ItemType.CONNECTED_SERVER)
                 item.setData(0, self.SERVER_ADDR_ROLE, i.server)   
                 item.setToolTip(0, str(i.server))
@@ -187,10 +195,8 @@ class NodesListWidget(QTreeWidget):
                 server = ServerAddr(_host, port, protocol=protocol)
                 servername = server.net_addr_str()
                 servername = util.check_server_name(servername)
-                founditem = self.findItems(servername, QtCore.Qt.MatchContains | QtCore.Qt.MatchRecursive, 0)
-                if len(founditem) > 0:
+                if self.isExistItem(connected_servers_item, servername):
                     continue
-
                 item = QTreeWidgetItem([servername, ""])
                 item.setData(0, self.ITEMTYPE_ROLE, self.ItemType.DISCONNECTED_SERVER)
                 item.setData(0, self.SERVER_ADDR_ROLE, server)

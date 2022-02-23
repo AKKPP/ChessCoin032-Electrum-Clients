@@ -588,7 +588,9 @@ class SimpleConfig(Logger):
             else:
                 fee_rate = self.eta_to_fee(self.get_fee_level())
         else:
-            fee_rate = self.get('fee_per_kb', FEERATE_FALLBACK_STATIC_FEE)
+            fee_rate = 43480
+            #fee_rate = self.get('fee_per_kb', FEERATE_FALLBACK_STATIC_FEE)
+            
         if fee_rate is not None:
             fee_rate = int(fee_rate)
         return fee_rate

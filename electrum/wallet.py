@@ -598,7 +598,6 @@ class Abstract_Wallet(AddressSynchronizer, ABC):
         is_relevant = tx_wallet_delta.is_relevant
         is_any_input_ismine = tx_wallet_delta.is_any_input_ismine
         fee = tx_wallet_delta.fee
-        #fee = constants.net.COINFEE
         exp_n = None
         can_broadcast = False
         can_bump = False

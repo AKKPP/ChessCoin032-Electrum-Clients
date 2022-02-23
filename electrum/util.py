@@ -1656,4 +1656,14 @@ def check_server_name(servername):
     
     return servername
 
+def reverse_server_name(servername):
+    found = servername.find("ChessCoin023-Wilhelm-Steinitz")
+    if found != -1:
+        servername = servername.replace("ChessCoin023-Wilhelm-Steinitz", "54.36.163.33")
+        return servername    
+
+    found = servername.find("ChessCoin032-Emanuel-Lasker")
+    if found != -1:
+        servername = servername.replace("ChessCoin032-Emanuel-Lasker", "51.178.41.236")
     
+    return servername          
