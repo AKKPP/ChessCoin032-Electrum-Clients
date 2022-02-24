@@ -171,11 +171,10 @@ class NodesListWidget(QTreeWidget):
                 star = ' *' if i == network.interface else ''
                 servername = f"{i.server.to_friendly_name()}"
                 servername = util.check_server_name(servername)
-                #item = QTreeWidgetItem([servername + star, '%d'%i.tip])
-                item = QTreeWidgetItem([servername + star, ""])
+                item = QTreeWidgetItem([servername + star, '%d'%i.tip])
                 item.setData(0, self.ITEMTYPE_ROLE, self.ItemType.CONNECTED_SERVER)
                 item.setData(0, self.SERVER_ADDR_ROLE, i.server)   
-                item.setToolTip(0, str(i.server))
+                item.setToolTip(0, 'server: ' + util.trunc_server_name(servername))
                 x.addChild(item)
             if n_chains > 1:
                 connected_servers_item.addChild(x)
@@ -196,6 +195,8 @@ class NodesListWidget(QTreeWidget):
                 servername = server.net_addr_str()
                 servername = util.check_server_name(servername)
                 if self.isExistItem(connected_servers_item, servername):
+                    continue
+                if self.isExistItem(disconnected_servers_item, servername):
                     continue
                 item = QTreeWidgetItem([servername, ""])
                 item.setData(0, self.ITEMTYPE_ROLE, self.ItemType.DISCONNECTED_SERVER)

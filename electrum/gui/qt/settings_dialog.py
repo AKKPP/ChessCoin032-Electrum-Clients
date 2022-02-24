@@ -466,15 +466,7 @@ class SettingsDialog(WindowModalDialog):
             ex_combo.blockSignals(False)
 
         def on_currency(hh):
-            if not self.fx: return
-            b = bool(ccy_combo.currentIndex())
-            ccy = str(ccy_combo.currentText()) if b else None
-            self.fx.set_enabled(b)
-            if b and ccy != self.fx.ccy:
-                self.fx.set_currency(ccy)
-            update_history_cb()
-            update_exchanges()
-            self.window.update_fiat()
+            pass
 
         def on_exchange(idx):
             exchange = str(ex_combo.currentText())

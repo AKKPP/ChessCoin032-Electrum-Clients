@@ -502,11 +502,11 @@ class SimpleConfig(Logger):
 
     def get_depth_level(self):
         maxp = len(FEE_DEPTH_TARGETS) - 1
-        return min(maxp, self.get('depth_level', 2))
+        return min(maxp, self.get('depth_level', 3))
 
     def get_fee_level(self):
         maxp = len(FEE_ETA_TARGETS)  # not (-1) to have "next block"
-        return min(maxp, self.get('fee_level', 2))
+        return min(maxp, self.get('fee_level', 4))
 
     def get_fee_slider(self, dyn, mempool) -> Tuple[int, int, Optional[int]]:
         if dyn:
@@ -546,7 +546,7 @@ class SimpleConfig(Logger):
             return self.has_fee_etas()
 
     def is_dynfee(self):
-        return bool(self.get('dynamic_fees', True))
+        return False
 
     def use_mempool_fees(self):
         return bool(self.get('mempool_fees', False))

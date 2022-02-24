@@ -1667,3 +1667,7 @@ def reverse_server_name(servername):
         servername = servername.replace("ChessCoin032-Emanuel-Lasker", "51.178.41.236")
     
     return servername          
+
+def trunc_server_name(servername):
+    servername = servername.replace(":57302", "")
+    return servername

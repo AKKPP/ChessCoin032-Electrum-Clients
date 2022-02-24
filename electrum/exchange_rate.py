@@ -540,10 +540,11 @@ class FxThread(ThreadJob):
                 await self.exchange.update_safe(self.ccy)
 
     def is_enabled(self):
-        return bool(self.config.get('use_exchange_rate', DEFAULT_ENABLED))
+        return False
+        #return bool(self.config.get('use_exchange_rate', False))
 
     def set_enabled(self, b):
-        self.config.set_key('use_exchange_rate', bool(b))
+        self.config.set_key('use_exchange_rate', False)
         self.trigger_update()
 
     def get_history_config(self, *, allow_none=False):
