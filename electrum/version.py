@@ -10,6 +10,8 @@ elif _platform == "win32":
     ELECTRUM_VERSION = '1.0.1.1'
 elif _platform == "win64":
     ELECTRUM_VERSION = '1.0.1.1'
+else:
+    ELECTRUM_VERSION = '1.0.1.4'
 
 APK_VERSION = '1.0.1.4'        # read by buildozer.spec
 

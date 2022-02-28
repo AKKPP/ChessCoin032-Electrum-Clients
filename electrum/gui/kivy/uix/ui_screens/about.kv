@@ -1,7 +1,7 @@
 #:import VERSION electrum.version.ELECTRUM_VERSION
 
 Popup:
-    title: _("About Electrum")
+    title: _("About Chesscoin")
     BoxLayout:
         orientation: 'vertical'
         spacing: '10dp'
@@ -29,17 +29,11 @@ Popup:
                 text: '[color=6666ff][ref=x]https://electrum.org[/ref][/color]'
                 on_ref_press:
                     import webbrowser
-                    webbrowser.open("https://electrum.org")
+                    webbrowser.open("https://chesscoin032.com/")
                 size_hint_x: 0.6
             TopLabel:
-                text: _('Developers')
-                size_hint_x: 0.4
-            TopLabel:
-                text: '\n'.join(['Thomas Voegtlin', 'SomberNight'])
-                size_hint_x: 0.6
-        TopLabel:
-            text: _('Distributed by Electrum Technologies GmbH')
-            padding: '0dp', '20dp'
+            text: _('Welcome to ChessCoin 0.32%\n')
+            padding: '0dp', '10dp'
         Widget:
             size_hint: None, 0.5
         BoxLayout:

@@ -118,8 +118,8 @@ exe_standalone = EXE(
     a.datas,
     name=os.path.join('build\\pyi.win32\\electrum', cmdline_name + ".exe"),
     debug=False,
-    strip=None,
-    upx=False,
+    strip=True,
+    upx=True,
     icon=home+'electrum/gui/icons/electrum.ico',
     console=False)
     # console=True makes an annoying black box pop up, but it does make Electrum output command line commands, with this turned off no output will be given but commands can still be used
