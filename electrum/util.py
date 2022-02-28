@@ -809,9 +809,9 @@ testnet_block_explorers = {
     'Chesscoin032': ('http://explorer.chesscoin032.com/',
                         {'tx': '', 'addr': ''}),
     'cryptoid.info': ('https://chainz.cryptoid.info/chess/',
-                       {'tx': '', 'addr': ''}),
+                        {'tx': '', 'addr': ''}),
     'system default': ('blockchain://000000000933ea01ad0ee984209779baaec3ced90fa3f408719526f8d77f4943/',
-                       {'tx': 'tx/', 'addr': 'address/'}),
+                        {'tx': 'tx/', 'addr': 'address/'}),
 }
 
 signet_block_explorers = {

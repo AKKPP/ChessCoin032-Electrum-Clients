@@ -11,7 +11,7 @@ elif _platform == "win32":
 elif _platform == "win64":
     ELECTRUM_VERSION = '1.0.1.1'
 
-APK_VERSION = '4.1.5.0'        # read by buildozer.spec
+APK_VERSION = '1.0.1.4'        # read by buildozer.spec
 
 PROTOCOL_VERSION = '1.4'     # protocol version requested
 

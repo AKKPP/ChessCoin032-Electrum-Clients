@@ -541,7 +541,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
 
     @classmethod
     def get_app_name_and_version_str(cls) -> str:
-        name = "ChessCoin032 Electrum"
+        name = "ChessCoin Electrum"
         if constants.net.TESTNET:
             name += " " + constants.net.NET_NAME.capitalize()
         return f"{name} {ELECTRUM_VERSION}"
