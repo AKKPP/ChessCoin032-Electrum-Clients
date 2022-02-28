@@ -792,7 +792,7 @@ class ElectrumWindow(QMainWindow, MessageBoxMixin, Logger):
                            _("You do not need to perform regular backups, because your wallet can be " 
                               "recovered from a secret phrase that you can memorize or write on paper.") + " " +
                            _("Startup times are instant because it operates in conjunction with high-performance "
-                              "servers that handle the most complicated parts of the Bitcoin system.") + "\n\n" +
+                              "servers that handle the most complicated parts of the Chesscoin system.") + "\n\n" +
                            _("This is experimental software.")))
 
     def show_bitcoin_paper(self):
