@@ -78,7 +78,6 @@ Development version (git clone)
 Check out the code from GitHub::
 
     git clone git://github.com/AKKPP/ChessCoin032-Electrum-Clients.git
-      (or git clone git://github.com/OleksandrAAA/Chesscoin-electrum.git)
     cd Chesscoin-electrum
     git submodule update --init
 
