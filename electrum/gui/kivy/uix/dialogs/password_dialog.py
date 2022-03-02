@@ -188,7 +188,7 @@ class AbstractPasswordDialog(Factory.Popup):
         self.is_change = is_change
         self.pw = None
         self.new_password = None
-        self.title = 'Electrum'
+        self.title = 'Chesscoin'
         self.level = 1 if is_change and not has_password else 0
         self.basename = basename
         self.update_screen()
