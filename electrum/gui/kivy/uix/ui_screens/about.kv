@@ -1,4 +1,4 @@
-#:import VERSION electrum.version.ELECTRUM_VERSION
+#:import VERSION electrum.version.APK_VERSION
 
 Popup:
     title: _("About Chesscoin")
@@ -19,23 +19,30 @@ Popup:
                 text: _('Licence')
                 size_hint_x: 0.4
             TopLabel:
-                text: "MIT Licence"
+                text: "MIT/X11 Software Licence"
                 size_hint_x: 0.6
             TopLabel:
                 text: _('Homepage')
                 size_hint_x: 0.4
             TopLabel:
                 markup: True
-                text: '[color=6666ff][ref=x]https://electrum.org[/ref][/color]'
+                text: '[color=6666ff][ref=x]https://chesscoin032.com[/ref][/color]'
                 on_ref_press:
                     import webbrowser
                     webbrowser.open("https://chesscoin032.com/")
                 size_hint_x: 0.6
         TopLabel:
             text: _('Welcome to ChessCoin 0.32%\n')
+            font_size: '20dp'
+            padding: '0dp', '10dp'
+        TopLabel:
+            text: _('ChessCoin 032% is simple, practical and pragmatic!\n')
+            padding: '0dp', '10dp'
+        TopLabel:
+            text: _('Copyright (c) 2022 ChessCoin 032% The ChessCoin 0.32% developers\n\nThis is experimental software.')
             padding: '0dp', '10dp'
         Widget:
-            size_hint: None, 0.5
+            size_hint: None, 0.6
         BoxLayout:
             size_hint: 1, None
             height: '48dp'
