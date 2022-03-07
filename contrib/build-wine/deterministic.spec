@@ -168,7 +168,7 @@ coll = COLLECT(
     a.zipfiles,
     a.datas,
     strip=None,
-    upx=False,
+    upx=True,
     debug=False,
     icon=home+'electrum/gui/icons/electrum.ico',
     console=False,
