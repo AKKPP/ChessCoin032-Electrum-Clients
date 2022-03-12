@@ -41,10 +41,19 @@ if [[ -n "$1"  && "$1" == "release" ]] ; then
     # do release build, and sign the APKs.
     echo -n Keystore Password:
     read -s password
-    export P4A_RELEASE_KEYSTORE=~/.keystore
+    #export P4A_RELEASE_KEYSTORE=~/.keystore
+    export P4A_RELEASE_KEYSTORE="$CONTRIB_ANDROID"/android_release.keystore
     export P4A_RELEASE_KEYSTORE_PASSWD=$password
     export P4A_RELEASE_KEYALIAS_PASSWD=$password
     export P4A_RELEASE_KEYALIAS=electrum
+    # create keystore if needed
+    if [ ! -f "$P4A_RELEASE_KEYSTORE" ]; then
+        keytool -genkey -v -keystore "$CONTRIB_ANDROID"/android_release.keystore \
+            -alias "$P4A_RELEASE_KEYALIAS" -keyalg RSA -keysize 2048 -validity 10000 \
+            -dname "CN=mqttserver.ibm.com, OU=ID, O=IBM, L=Hursley, S=Hants, C=GB" \
+            -storepass "$P4A_RELEASE_KEYSTORE_PASSWD" \
+            -keypass "$P4A_RELEASE_KEYALIAS_PASSWD"
+    fi
     # build two apks
     export APP_ANDROID_ARCH=armeabi-v7a
     make release
@@ -75,8 +84,8 @@ else
     # only build one apk for debug build, for faster testing iterations
     export APP_ANDROID_ARCH=arm64-v8a
     make apk
-    # export APP_ANDROID_ARCH=armeabi-v7a
-    # make apk
+    export APP_ANDROID_ARCH=armeabi-v7a
+    make apk
 fi
 
 popd
