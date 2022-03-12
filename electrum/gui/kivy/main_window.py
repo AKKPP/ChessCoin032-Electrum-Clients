@@ -1059,7 +1059,7 @@ class ElectrumWindow(App, Logger):
             return
         self.qr_dialog(label.name, label.data, show_text_with_qr)
 
-    def show_error(self, error, width='200dp', pos=None, arrow_pos=None,
+    def show_error(self, error, width='250dp', pos=None, arrow_pos=None,
                    exit=False, icon=f'atlas://{KIVY_GUI_PATH}/theming/atlas/light/error', duration=0,
                    modal=False):
         ''' Show an error Message Bubble.
@@ -1068,7 +1068,7 @@ class ElectrumWindow(App, Logger):
             pos=pos or Window.center, arrow_pos=arrow_pos, exit=exit,
             duration=duration, modal=modal)
 
-    def show_info(self, error, width='200dp', pos=None, arrow_pos=None,
+    def show_info(self, error, width='250dp', pos=None, arrow_pos=None,
                   exit=False, duration=0, modal=False):
         ''' Show an Info Message Bubble.
         '''
@@ -1122,7 +1122,8 @@ class ElectrumWindow(App, Logger):
             img.allow_stretch = False
             info_bubble.dim_background = False
             info_bubble.background_image = 'atlas://data/images/defaulttheme/bubble'
-        info_bubble.message = text
+
+        info_bubble.message = '[size=18dp]' + text
         if not pos:
             pos = (win.center[0], win.center[1] - (info_bubble.height/2))
         info_bubble.show(pos, duration, width, modal=modal, exit=exit)
