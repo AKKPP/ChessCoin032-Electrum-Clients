@@ -297,7 +297,7 @@ class SettingsDialog(WindowModalDialog):
         savedlocation_edit = QLineEdit()
         savedlocation_edit.setReadOnly(True)
         savedlocation_edit.setText(util.user_dir())
-        savedlocation_edit.setStyleSheet("background-color:white")
+        #savedlocation_edit.setStyleSheet("background-color:white")
         gui_widgets.append((savedlocation_edit, None))
 
         preview_cb = QCheckBox(_('Advanced preview'))

@@ -1637,34 +1637,47 @@ def get_running_loop():
 def check_server_name(servername):
     found = servername.find("54.36.163.33")
     if found != -1:
-        servername = servername.replace("54.36.163.33", "ChessCoin023-Wilhelm-Steinitz")
+        servername = servername.replace("54.36.163.33", "ChessCoin032-Wilhelm-Steinitz")
         return servername
 
     found = servername.find("51.178.41.236")
     if found != -1:
         servername = servername.replace("51.178.41.236", "ChessCoin032-Emanuel-Lasker")
         return servername
+    
+    found = servername.find("54.38.157.243")
+    if found != -1:
+        servername = servername.replace("54.38.157.243", "ChessCoin032-Vera-Menchik")
+        return servername
 
     found = servername.find("vps-f40cfe72.vps.ovh.net")
     if found != -1:
-        servername = servername.replace("vps-f40cfe72.vps.ovh.net", "ChessCoin023-Wilhelm-Steinitz")
+        servername = servername.replace("vps-f40cfe72.vps.ovh.net", "ChessCoin032-Wilhelm-Steinitz")
         return servername
 
     found = servername.find("vps-84983adc.vps.ovh.net")
     if found != -1:
         servername = servername.replace("vps-84983adc.vps.ovh.net", "ChessCoin032-Emanuel-Lasker")
+
+    found = servername.find("vps-2e25352c.bps.ovh.net")
+    if found != -1:
+        servername = servername.replace("vps-2e25352c.vps.ovh.net", "ChessCoin032-Vera-Menchik")
     
     return servername
 
 def reverse_server_name(servername):
-    found = servername.find("ChessCoin023-Wilhelm-Steinitz")
+    found = servername.find("ChessCoin032-Wilhelm-Steinitz")
     if found != -1:
-        servername = servername.replace("ChessCoin023-Wilhelm-Steinitz", "54.36.163.33")
+        servername = servername.replace("ChessCoin032-Wilhelm-Steinitz", "54.36.163.33")
         return servername    
 
     found = servername.find("ChessCoin032-Emanuel-Lasker")
     if found != -1:
         servername = servername.replace("ChessCoin032-Emanuel-Lasker", "51.178.41.236")
+
+    found = servername.find("ChessCoin032-Vera-Menchik")
+    if found != -1:
+        servername = servername.replace("ChessCoin032-Vera-Menchik", "54.38.157.243")
     
     return servername          
 

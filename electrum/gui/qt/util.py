@@ -822,9 +822,9 @@ class ButtonsWidget(QWidget):
     def addButton(self, icon_name, on_click, tooltip):
         button = QToolButton(self)
         button.setIcon(read_QIcon(icon_name))
-        button.setIconSize(QSize(25,25))
+        button.setIconSize(QSize(21,21))
         button.setCursor(QCursor(Qt.PointingHandCursor))
-        button.setStyleSheet("QToolButton { border: none; hover {border: 1px} pressed {border: 1px} padding: 0px; }")
+        button.setStyleSheet("QToolButton { border: none; hover {border: 1px} pressed {border: 1px} padding: 1px; }")
         button.setVisible(True)
         button.setToolTip(tooltip)
         button.clicked.connect(on_click)

@@ -42,6 +42,13 @@ else
 fi
 
 info "building binary..."
+# check uid and maybe chown. see #8261
+if [ ! -z "$ELECBUILD_COMMIT" ] ; then  # fresh clone (reproducible build)
+    if [ $(id -u) != "1000" ] || [ $(id -g) != "1000" ] ; then
+        info "need to chown -R FRESH_CLONE dir. prompting for sudo."
+        sudo chown -R 1000:1000 "$FRESH_CLONE"
+    fi
+fi
 sudo docker run -it \
     --name electrum-appimage-builder-cont \
     -v "$PROJECT_ROOT_OR_FRESHCLONE_ROOT":/opt/electrum \
